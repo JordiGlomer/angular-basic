@@ -1,4 +1,6 @@
-# II.1 Herramientas
+# I.1 Herramientas
+
+- [Hola Angular CLI](https://academia-binaria.com/hola-angular-cli/)
 
 ## Angular CLI
 
@@ -14,8 +16,6 @@ code .
 ng serve
 ng build
 ```
-
-- [Hola Angular CLI](https://academia-binaria.com/hola-angular-cli/)
 
 ## VSCode
 
