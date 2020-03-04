@@ -4,8 +4,8 @@ Crea aplicaciones multiplataforma, escalables y limpias.
 
 **Taller práctico**
 
-<!-- - [Temario](https://academiabinaria.github.io/angular-basic/readme/index.html)
-- [Ejemplo ejecutable](https://academiabinaria.github.io/angular-basic/board/) -->
+- [Blog tutorial](https://academia-binaria.com/hola-angular-cli/)
+- [Ejemplo ejecutable](https://academiabinaria.github.io/angular-basic/)
 - [Curso Online](https://www.trainingit.es/curso-angular-basico/?promo=angular.builders)
 
 Introducción
