@@ -8,7 +8,6 @@
     "build": "ng build",
     "build:prod": "ng build --prod",
     "deploy": "ng deploy --baseHref=/angular-basic/",
-    "push": "git add * && git commit -m 'pub' && git push",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
