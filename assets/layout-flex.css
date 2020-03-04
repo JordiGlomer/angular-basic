@@ -1,34 +1,34 @@
-body {
+body > ab-root {
   min-height: 100vh;
 }
 
 body,
-body > main {
+body > ab-root > main {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
 }
 
-body > main > nav {
+body > ab-root > main > nav {
   order: -1;
   flex-direction: row;
 }
 
-body > main > section {
+body > ab-root > main > section {
   flex: 1 1 auto;
 }
 
-body > main > aside {
+body > ab-root > main > aside {
   display: none;
 }
 
 @media (min-width: 768px) {
-  body > main {
+  body > ab-root > main {
     flex-direction: row;
   }
 
-  body > main > nav,
-  body > main > aside {
+  body > ab-root > main > nav,
+  body > ab-root > main > aside {
     flex: 0 0 260px;
     display: flex;
     flex-direction: column;
