@@ -95,8 +95,6 @@ cd empresarial
 ng g application compras -p acme --routing true
 ```
 
---
-
 ### 1.2.5 Angular Basic
 
 La aplicación que acompaña a este tutorial fue creada con este comando:
@@ -256,8 +254,6 @@ export const environment = {
 title = environment.appName + 'hello world ;-)';
 ```
 
---
-
 ### Ejemplo Assets
 
 ```html
@@ -300,8 +296,6 @@ http://localhost:4291/
 ## 4.1. Extensiones de Visual Studio
 
 - [Extensiones Esenciales](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
-- [Prettier](https://prettier.io/)
-- [Angular Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
 
 ---
 
@@ -351,21 +345,35 @@ module.exports = {
 ## Configurar Prettier
 
 ## Ecosistema de terceros
-
 ---
 
-# Práctica
-> Crear una aplicación con el CLI de Angular llamada `Balance` que sea enrutable.
+# Demostración
 
-- [ ] Crear la aplicación con el CLI
-- [ ] Modificar package.json (auto open port 4229)
-- [ ] Usar angular-http-server (build)
+Crear una aplicación con el CLI de Angular para gestión de libros llamada `Angular-Books` .
+
 
 ### Extra
 
-[angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages)
+[angular-http-server](https://www.npmjs.com/package/angular-http-server)
+```
+npm install -g angular-http-server
+```
+[Deploy to GitHub pages](https://angular.io/guide/deployment#deploy-to-github-pages)
+```
+ng add angular-cli-ghpages
+ng deploy --base-href=/angular-basic/
+```
+---
 
---
+# Práctica
+> Crear una aplicación con el CLI de Angular llamada `Angular-Balance` que sea enrutable.
+
+- [ ] Crear la aplicación con el CLI
+- [ ] Modificar package.json (auto open port 4229)
+- [ ] Extra: Usar angular-http-server (build)
+- [ ] Extra: Publicar en GitHub Pages (build)
+
+---
 
 > Next:
 
