@@ -36,30 +36,29 @@ Material necesario
 
 ---
 
-# [0-Hello](https://academiabinaria.github.io/angular-basic/readme/0-hello.html)
+# [0-Hello](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/0-hello.md)
 
-# [1-Base](https://academiabinaria.github.io/angular-basic/readme/1-base.html)
+> 🚧 Work in process...
 
----
-
-# [2-SPA](https://academiabinaria.github.io/angular-basic/readme/2-spa.html)
-
-# [3-Data](https://academiabinaria.github.io/angular-basic/readme/3-data.html)
+# [1-Base](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/1-base.html)
 
 ---
 
-# [4-Flow](https://academiabinaria.github.io/angular-basic/readme/4-flow.html)
+# [2-SPA](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/2-spa.html)
 
-# [5-Inject](https://academiabinaria.github.io/angular-basic/readme/5-inject.html)
-
----
-
-# [6-Http](https://academiabinaria.github.io/angular-basic/readme/6-http.html)
-
-# [7-Watch](https://academiabinaria.github.io/angular-basic/readme/7-watch.html)
+# [3-Data](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/3-data.html)
 
 ---
 
-# [8-Reactive](https://academiabinaria.github.io/angular-basic/readme/8-reactive.html)
+# [4-Flow](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/4-flow.html)
+
+# [5-Inject](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/5-inject.html)
+
+---
+
+# [6-Http](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/6-http.html)
+
+# [7-Watch](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/7-watch.html)
+
 
 
