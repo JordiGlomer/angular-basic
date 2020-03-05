@@ -405,6 +405,23 @@ AppComponent
 
 ---
 
+# Demostración en clase
+
+> Mostrar módulos y componentes de infraestructura en `Angular-Budget`
+
+---
+
+
+# Práctica propuesta para alumnos
+
+> Crear módulos de infraestructura en `Angular-Balance`
+
+- [ ] Crear un módulo `layout`
+- [ ] Crear componentes `shell`, `header`,`main`,`footer`
+- [ ] Crear un módulo `shared`
+-
+
+---
 > Next:
 
 # [Páginas y rutas Angular SPA](https://academiabinaria.github.io/angular-basic/readme/2-spa.html)
