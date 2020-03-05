@@ -303,6 +303,9 @@ http://localhost:4291/
 
 ### Prettier.config.js
 
+npm install prettier -D
+npm install tslint-config-prettier -D
+
 ```js
 module.exports = {
   printWidth: 120,

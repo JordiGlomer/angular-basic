@@ -25,6 +25,10 @@ ng build
 
 - Prettier
 
+`npm install prettier -D`
+
+
+
 - TsLint
 
 > **Ejemplo:** Aplicación de gestión de tareas: ng-tasks
