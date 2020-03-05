@@ -347,25 +347,30 @@ module.exports = {
 ## Ecosistema de terceros
 ---
 
-# Demostración
+# Demostración en clase
 
-Crear una aplicación con el CLI de Angular para gestión de libros llamada `Angular-Books` .
+Mostraremos cómo crear una aplicación con el CLI de Angular para gestión de proyectos y presupuestos llamada `Angular-Budget` .
 
 
 ### Extra
 
 [angular-http-server](https://www.npmjs.com/package/angular-http-server)
+
 ```
 npm install -g angular-http-server
 ```
+
 [Deploy to GitHub pages](https://angular.io/guide/deployment#deploy-to-github-pages)
+
 ```
 ng add angular-cli-ghpages
 ng deploy --base-href=/angular-basic/
 ```
+
 ---
 
-# Práctica
+# Práctica propuesta para alumnos
+
 > Crear una aplicación con el CLI de Angular llamada `Angular-Balance` que sea enrutable.
 
 - [ ] Crear la aplicación con el CLI
