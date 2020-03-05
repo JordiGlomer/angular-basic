@@ -419,7 +419,6 @@ AppComponent
 - [ ] Crear un módulo `layout`
 - [ ] Crear componentes `shell`, `header`,`main`,`footer`
 - [ ] Crear un módulo `shared`
--
 
 ---
 > Next:
