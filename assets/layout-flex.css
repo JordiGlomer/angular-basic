@@ -2,7 +2,11 @@ body > ab-root {
   min-height: 100vh;
 }
 
-body,
+/*
+🔥🔥🔥🔥
+moved to : main.component.css 🚒🚒🚒
+🔥🔥🔥🔥
+
 body > ab-root > main {
   display: flex;
   flex: 1 1 auto;
@@ -34,3 +38,4 @@ body > ab-root > main > aside {
     flex-direction: column;
   }
 }
+*/
