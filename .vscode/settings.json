@@ -42,10 +42,7 @@
   "files.trimTrailingWhitespace": true,
   "html.format.wrapAttributes": "force-aligned",
   "html.format.enable": true,
-  "html.format.wrapLineLength": 120,
-  "prettier.printWidth": 120,
-  "prettier.bracketSpacing": true,
-  "prettier.singleQuote": true,
+  "html.format.wrapLineLength": 100,
   "spellright.language": ["en", "es"],
   "spellright.documentTypes": ["markdown", "latex", "plaintext", "html"],
   "workbench.iconTheme": "material-icon-theme"
