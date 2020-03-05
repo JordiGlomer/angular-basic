@@ -23,6 +23,9 @@
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorStyle": "line",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
   "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
