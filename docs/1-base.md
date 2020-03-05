@@ -1,16 +1,8 @@
-title: 1-Base
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
+---
+marp: true
 ---
 
-class: impact
-
-# {{title}}
+# 1-Base
 
 ## Base para una aplicación Angular
 
@@ -26,8 +18,6 @@ class: impact
 
 ---
 
-class: impact
-
 # 1. Módulos
 
 ## Anatomía de un módulo
@@ -41,16 +31,14 @@ class: impact
 Un módulo es una clase decorada en **TypeScript**
 
 ```typescript
-*@NgModule({
+@NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-*export class AppModule {}
+export class AppModule {}
 ```
-
---
 
 ### Árbol de módulos mediante el array de `imports:[]`
 
@@ -64,9 +52,7 @@ Usando el programa `ng` con el comando `generate` con la opción `module` y un n
 ng g m layout
 ```
 
---
-
-Resulta en el fichero `core/layout.module.ts`
+Resulta en el fichero `app/layout.module.ts`
 
 ```typescript
 @NgModule({
@@ -85,26 +71,13 @@ Se agrega al array de importaciones en `AppModule`
 ```typescript
 @NgModule({
     declarations: [AppComponent],
-*   imports: [BrowserModule, AppRoutingModule, LayoutModule],
+    imports: [BrowserModule, AppRoutingModule, LayoutModule],
     providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```
-
 ---
-
-> Recap:
-
-# 1. Módulos
-
-## Anatomía de un módulo
-
-## Generación de módulos
-
----
-
-class: impact
 
 # 2. Componentes
 
@@ -124,8 +97,8 @@ class: impact
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-* templateUrl: './app.component.html',
+  selector: 'ab-root',
+  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {}
@@ -139,7 +112,7 @@ export class AppComponent {}
 
 ```typescript
 @NgModule({
-* declarations: [AppComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, LayoutModule],
   providers: [],
   bootstrap: [AppComponent]
@@ -147,13 +120,11 @@ export class AppComponent {}
 export class AppModule {}
 ```
 
---
-
 - Y está listo para ser instanciado
 
 ```html
 <body>
-  <app-root></app-root>
+  <ab-root></ab-root>
 </body>
 ```
 
@@ -170,13 +141,11 @@ ng g c layout/shell/main
 ng g c layout/shell/footer
 ```
 
---
-
 Resulta en ficheros como `core/shell.component.ts`
 
 ```typescript
 @Component({
-* selector: 'app-shell',
+  selector: 'ab-shell',
   templateUrl: './shell.component.html',
   styles: []
 })
@@ -191,24 +160,12 @@ export class ShellComponent implements OnInit {
 ### Composición de componentes
 
 ```html
-<app-header></app-header>
-<app-main></app-main>
-<app-footer></app-footer>
+<ab-header></ab-header>
+<ab-main></ab-main>
+<ab-footer></ab-footer>
 ```
 
 ---
-
-> Recap:
-
-# 2. Componentes
-
-## Anatomía de un componente
-
-## Generación de componentes
-
----
-
-class: impact
 
 # 3. Visibilidad entre componentes
 
@@ -224,20 +181,16 @@ Los componentes inicialmente **sólo pueden usarse en su propio módulo**
 
 > Para poder usar un componente fuera de su módulo necesito
 
---
-
 ### Exportar el componente
 
 ```typescript
 @NgModule({
   declarations: [ShellComponent, HeaderComponent, MainComponent, FooterComponent],
   imports: [CommonModule, RouterModule],
-* exports: [ShellComponent]
+  exports: [ShellComponent]
 })
 export class LayoutModule {}
 ```
-
---
 
 > y algo más...
 
@@ -248,7 +201,7 @@ export class LayoutModule {}
 ```typescript
 @NgModule({
   declarations: [AppComponent],
-* imports: [BrowserModule, AppRoutingModule, LayoutModule],
+  imports: [BrowserModule, AppRoutingModule, LayoutModule],
   providers: [],
   bootstrap: [AppComponent]
 })
@@ -258,7 +211,7 @@ export class AppModule {}
 y entonces `app.component.html` queda ridículamente simple:
 
 ```html
-<app-shell></app-shell>
+<ab-shell></ab-shell>
 ```
 
 ---
@@ -279,7 +232,7 @@ y entonces `app.component.html` queda ridículamente simple:
 ```typescript
 @NgModule({
   declarations: [ShellComponent, HeaderComponent, MainComponent, FooterComponent],
-* imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   exports: [ShellComponent]
 })
 export class LayoutModule {}
@@ -293,35 +246,17 @@ export class LayoutModule {}
 
 Para que algo sea visible desde fuera
 
---
-
 #### Primero debe exportarlo
 
 ```typescript
 export class AppComponent {}
 ```
 
---
-
 #### Y luego importarlo
 
 ```typescript
 import { AppComponent } from './app.component';
 ```
-
----
-
-> Recap:
-
-# 3. Visibilidad entre componentes
-
-## Componentes públicos y privados
-
-## Importación y exportación entre módulos
-
----
-
-class: impact
 
 # 4. Transitividad y Organización
 
@@ -335,23 +270,17 @@ class: impact
 
 > Un módulo puede exportar sus componentes
 
---
-
 > Pero también los de otros módulos relacionados
-
---
 
 > Incluso un módulo completo
 
---
+---
 
 - Al mover contenido de `app.component.html` a los componentes de `CoreModule`.
 - Para que funcionase hubo que importar el `RouterModule`, necesario para usar `<router-outlet>`.
-- ¿Cómo es que **antes funcionaba**?
+> ¿Cómo es que **antes funcionaba**?
 
---
-
-- Por la **transitividad** usada en `AppRoutingModule`
+>> Por la **transitividad** usada en `AppRoutingModule`
 
 ---
 
@@ -364,21 +293,23 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [];
 @NgModule({
-* imports: [RouterModule.forRoot(routes)],
-* exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
 ```
 
---
+---
 
 Luego el contenido `RouterModule` se podía usar directamente en `AppModule`
 
 En `app.component.html`
 
 ```html
-<h2>Here are some links to help you start:...</h2>
-*<router-outlet></router-outlet>
+<main>Fork this <a
+      href="https://github.com/AcademiaBinaria/angular-basic">Repository</a>
+      <router-outlet></router-outlet>
+</main>
 ```
 
 ---
@@ -389,47 +320,25 @@ En `app.component.html`
 - Los principios de **código limpio** nos permiten identificarlas y reutilizarlas.
 - Los módulos y los componentes son piezas reutilizables
 
---
 
-- Habrá piezas _funcionales_ y otras de _infraestructura_.
-
---
+> Habrá piezas _funcionales_ y otras de _infraestructura_.
 
 - Alguna será de uso único como el `LayoutModule`
 - Y otras serán compartidas como el `SharedModule`
 
 ---
 
+- Módulo `shared`
+- Componente `GoHome`
+
 ```bash
 ng g m shared
-ng g c shared/now --export=true
+ng g c shared/go-home --export=true
 ```
+`go-home.component.html`
 
 ```html
-<time>
-  {{ now | date:'long' }}
-</time>
-```
-
-```typescript
-export class NowComponent implements OnInit {
-  public now = new Date();
-  constructor() {}
-  ngOnInit() {}
-}
-```
-
---
-
-```bash
-ng g m temporal
-ng g c temporal --export=true
-```
-
-```html
-<div>
-  <app-now></app-now>
-</div>
+<a href=""> Go home 🏠</a>
 ```
 
 ---
@@ -437,17 +346,17 @@ ng g c temporal --export=true
 ```html
 <main class="container ">
   <router-outlet></router-outlet>
-* <app-temporal></app-temporal>
+  <ab-go-gome></ab-go-gome>
 </main>
 ```
 
 ```typescript
 @NgModule({
   declarations: [ShellComponent, HeaderComponent, MainComponent, FooterComponent],
-  imports: [CommonModule, RouterModule, TemporalModule],
+  imports: [CommonModule, RouterModule, SharedModule],
   exports: [ShellComponent]
 })
-export class CoreModule {}
+export class LayoutModule {}
 ```
 
 ---
@@ -469,9 +378,7 @@ AppModule
    |
    +--RouterModule
    |
-   +--TemporalModule
-      |
-      +--SharedModule
+   +--SharedModule
 
 ```
 
@@ -490,23 +397,11 @@ AppComponent
    |  |
    |  +--RouterOutletComponent
    |  |
-   |  +--TemporalComponent
-   |     |
-   |     +--NowComponent
+   |  +--GoHomeComponent
    |
    +--FooterComponent
 
 ```
-
----
-
-> Recap:
-
-# 4. Transitividad y Organización
-
-## Transitividad en una cadena de módulos
-
-## Organización de la aplicación en módulos
 
 ---
 

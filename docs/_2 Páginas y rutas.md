@@ -12,11 +12,11 @@
 
 - [Páginas y rutas Angular SPA](https://academia-binaria.com/paginas-y-rutas-angular-spa/)
 
-> **Ejemplo:** Aplicación de gestión de tareas: tasks:
-- Dashboard inicial con contador de tareas pendientes y ya completadas
-- Formulario para el alta de nuevas tareas
-- Listado de tareas pendientes y realizadas
-- Vista para edición de una determinada tarea.
+> **Ejemplo:** Aplicación de gestión de proyectos: budget:
+- Dashboard inicial con contador de proyectos y total de importes
+- Formulario para el alta de nuevos proyectos
+- Listado de proyectos y presupuestos
+- Vista para edición de un determinad proyecto
 
 ## Práctica
 > Crear módulos para las rutas básicas de la aplicación: `/`, `/nuevo`, `/lista`, `/detalle:id`.

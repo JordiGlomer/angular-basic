@@ -1,6 +1,6 @@
 # II.3 Presentación de datos
 
-## Material Design y Flex-box
+## Grid y Flex-box
 
 - ng add @angular/material
 
@@ -12,13 +12,12 @@
 
 - [Formularios, tablas y modelos de datos en Angular](https://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/)
 
-> **Ejemplo:** Aplicación de gestión de tareas: tasks:
-- Shell principal con Material design
+> **Ejemplo:** Aplicación de gestión de proyectos: budget
+- Shell principal
 
 ## Práctica
 > Menú de navegación, página home de balance con datos de prueba.
 
-- [ ] Agregar Material design
 - [ ] Crear un navegador principal
 - [ ] Maquetar dashboard, form y table con datos fake
 
