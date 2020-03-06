@@ -1,16 +1,4 @@
-title: 2-SPA
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
----
-
-class: impact
-
-# {{title}}
+# 2-SPA
 
 ## Páginas y rutas Angular SPA
 
@@ -25,8 +13,6 @@ class: impact
 # 4. Parámetros
 
 ---
-
-class: impact
 
 # 1. Rutas
 

@@ -276,7 +276,7 @@ import { AppComponent } from './app.component';
 
 ---
 
-- Al mover contenido de `app.component.html` a los componentes de `CoreModule`.
+- Al mover contenido de `app.component.html` a los componentes de `LayoutModule`.
 - Para que funcionase hubo que importar el `RouterModule`, necesario para usar `<router-outlet>`.
 > ¿Cómo es que **antes funcionaba**?
 
