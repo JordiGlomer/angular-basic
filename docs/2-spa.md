@@ -14,6 +14,16 @@
 
 ---
 
+
+```bash
+ng g m home --route=home -m app-routing.module.ts
+ng g m not-found --route=not-found -m app-routing.module.ts
+ng g m courses --route=courses -m app-routing.module.ts
+```
+
+
+---
+
 # 1. Rutas
 
 ## RouterModule

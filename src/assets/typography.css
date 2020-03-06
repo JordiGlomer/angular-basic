@@ -1,7 +1,7 @@
 /* Setup */
 html {
   /* Change default typefaces here */
-  font-family: "Lato", serif;
+  font-family: 'Lato', serif;
   font-size: 137.5%;
   color: #3a4856;
   -webkit-font-smoothing: antialiased;
@@ -41,20 +41,20 @@ h4,
 h5,
 h6 {
   /* Change heading typefaces here */
-  font-family: "Comfortaa", sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   margin-top: 1.5rem;
   margin-bottom: 0;
   line-height: 1.5rem;
 }
 h1 {
-  font-size: 4.242rem;
-  line-height: 4.5rem;
-  margin-top: 3rem;
+  font-size: 2.828rem;
+  line-height: 4rem;
+  margin-top: 2rem;
 }
 h2 {
-  font-size: 2.828rem;
-  line-height: 3rem;
-  margin-top: 3rem;
+  font-size: 2.121rem;
+  line-height: 2rem;
+  margin-top: 2rem;
 }
 h3 {
   font-size: 1.414rem;
