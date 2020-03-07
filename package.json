@@ -1,6 +1,15 @@
 {
   "name": "angular-basic",
-  "version": "0.0.0",
+  "version": "9.0.0",
+  "description": "Tutorial introducción Angular V9",
+  "homepage": "https://academiabinaria.github.io/angular-basic/",
+  "author": {
+    "name": "Alberto Basalo",
+    "url": "https://twitter.com/albertobasalo"
+  },
+  "repository": {
+    "url": "https://github.com/AcademiaBinaria/angular-basic"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o --port 4290",
