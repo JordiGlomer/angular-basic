@@ -1,7 +1,3 @@
----
-marp: true
----
-
 # 0-hello
 
 ## [Hola Angular CLI](https://academia-binaria.com/hola-angular-cli/)
@@ -337,17 +333,6 @@ module.exports = {
 - [Angular Console](https://angularconsole.com/)
 - [Angular Next](https://next.angular.io/)
 
----
-
-> Recap:
-
-# 4. Angular, el CLI y su ecosistema
-
-## Extensiones de Visual Studio
-
-## Configurar Prettier
-
-## Ecosistema de terceros
 ---
 
 # Demostración en clase

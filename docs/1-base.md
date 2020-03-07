@@ -1,7 +1,3 @@
----
-marp: true
----
-
 # 1-Base
 
 ## Base para una aplicación Angular

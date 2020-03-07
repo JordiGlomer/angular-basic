@@ -14,16 +14,6 @@
 
 ---
 
-
-```bash
-ng g m home --route=home -m app-routing.module.ts
-ng g m not-found --route=not-found -m app-routing.module.ts
-ng g m courses --route=courses -m app-routing.module.ts
-```
-
-
----
-
 # 1. Rutas
 
 ## RouterModule
@@ -42,20 +32,23 @@ ng g m courses --route=courses -m app-routing.module.ts
 import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
-    path: 'heroes',
-    component: HeroesComponent
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'not-found',
-    component: NotFoundComponent
+    loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule),
   },
   {
+    path: 'courses',
+    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule) },
+  {
     path: '**',
-    redirectTo: 'not-found'
-  }
+    redirectTo: 'not-found',
+  },
 ];
 @NgModule({
-* imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
@@ -63,49 +56,36 @@ export class AppRoutingModule {}
 
 ---
 
-### Componentes y rutas
+### Módulos y rutas
 
 ```bash
-ng g c heroes
-ng g c layout/not-found
+ng g m home --route=home -m app-routing.module.ts
+ng g m not-found --route=not-found -m app-routing.module.ts
 ```
 
-### heroes.cmponent.html
+### home.component.html
 ```html
-<h2>Initial Links to start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank"
-         rel="noopener"
-         href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank"
-         rel="noopener"
-         href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank"
-         rel="noopener"
-         href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<h2> Welcome 🏡 !</h2>
+<nav>
+  <p>
+    <a routerLink="courses/introduccion">💻 Introducción</a>
+  </p>
+  <p>
+    <a routerLink="courses/avanzado">💻 Avanzado</a>
+  </p>
+</nav>
 ```
 
-El componente `HeroesComponent` se asocia con la ruta `'heroes'`
+El componente `HomeComponent` se asocia con la ruta vacía `''`
 El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
 
 --
 
 ### RedirectTo
 
-Nadie va voluntariamente a esa ruta
+> Nadie va voluntariamente a esa ruta
 
---
-
-Sólo los que se pierden
-
---
+>> Sólo los que se pierden
 
 ```typescript
 {
@@ -121,74 +101,37 @@ Sólo los que se pierden
 El contenido de `main.component.ts`, ahora será dinámico
 
 ```html
-<main class="container">
+<main>
+  <p>
+    Fork this <a href="https://github.com/AcademiaBinaria/angular-basic">Repository</a>
+  </p>
   <router-outlet></router-outlet>
-  <!-- Dynamic content here! -->
 </main>
 ```
 
 Por ejemplo el contenido de `NotFoundComponent` será
 
 ```html
-<h1>Not Found</h1>
-<h2>404</h2>
-<a routerLink="/">Go home</a>
+<h3>404</h3>
+<p> 🧭 not-found works!</p>
+<ab-go-home></ab-go-home>
 ```
 
 ---
 
 ## 1.2 Router Link
 
+En el `src\app\shared\go-home\go-home.component.html`
 ```html
-<a routerLink="/">Go home</a>
+<a routerLink=""> Go home 🏠</a>
 ```
 
-Es una _Directiva_
-
---
-
-Como un atributo, pero con superpoderes
-
---
+> Es una _Directiva_
+>>Como un atributo, pero con superpoderes
 
 Por ahora, _simplemente_ mantiene la gestión de las rutas en el lado del navegador.
 
 ---
-
-### Menu header
-
-El componente `app-header` queda así:
-
-```html
-<header class="sticky">
-  <a routerLink="/"
-     class="logo">
-    <span class="icon-home"></span>
-    <span>{{ title }}</span>
-  </a>
-  <a routerLink="heroes"
-     routerLinkActive="router-link-active"
-     class="button">
-    <span> 2- Heroes</span>
-  </a>
-</header>
-```
-
----
-
-> Recap:
-
-# 1. Rutas
-
-## RouterModule
-
-## Router Outlet
-
-## Router Link
-
----
-
-class: impact
 
 # 2 Lazy Loading
 
@@ -204,15 +147,9 @@ class: impact
 
 - Objetivo: diferir la descarga de las rutas no visitadas
 
---
-
 - Empaquetar cada ruta en un _bundle_
 
---
-
 - Requiere un módulo por ruta
-
---
 
 - Y un convenio especial con _webpack_
 
@@ -221,54 +158,29 @@ class: impact
 ### Crear los componentes en módulos con enrutado
 
 ```bash
-ng g m home --routing true
-ng g c home/home
-# heads up, new route parameters
-ng g m about --routing true --route about --module app-routing.module
+ng g m about --route=about -m app-routing.module.ts
  ```
-
---
-
 Y se configuran las `rutas` con **'rutas al módulo'**
 
 ```typescript
-const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-    //loadChildren: './home/home.module#HomeModule'
-  },
   {
     path: 'about',
     loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
-    //loadChildren: './about/about.module#AboutModule'
   }
-];
 ```
 
 ---
 
 ## 2.2 El enrutador delegado
 
-- `loadChildren` delega el enrutado en otro módulo; `HomeRoutingModule`
-
-```typescript
-const routes: Routes = [
-  {
-*   path: '',
-    component: HomeComponent
-  }
-];
-```
-
---
+- `loadChildren` delega el enrutado en otro módulo; el `AboutRoutingModule`
 
 > Ojo al path. En `AboutRoutingModule` sería:
 
 ```typescript
 const routes: Routes = [
   {
-*   path: '',
+    path: '',
     component: AboutComponent
   }
 ];
@@ -280,34 +192,8 @@ const routes: Routes = [
 
 ### Los bundles se descargan al navegar por las rutas
 
-Agregamos un enlace a esta nueva ruta en el `HeaderComponent`
-
-```html
-<a routerLink="about"
-    routerLinkActive="router-link-active"
-    class="button">
-  <img width="32"
-        style="vertical-align: -0.5em"
-        src="./assets/logo.png" />
-  <span> 2 - About us</span>
-</a>
-```
 
 ---
-
-> Recap:
-
-# 2 Lazy Loading
-
-## Webpack y los bundles por ruta
-
-## El enrutador delegado
-
-## Navegación
-
----
-
-class: impact
 
 # 3. Rutas anidadas
 
@@ -318,21 +204,6 @@ class: impact
 ---
 
 ## 3.1 Children
-
-En `HeaderComponent`
-
-```html
-<header class="sticky">
-  <a routerLink="/" class="logo">
-    <span class="icon-home"></span> <span>{{ title }}</span>
-  </a>
-  <a routerLink="about" class="button">
-    <span> About us</span>
-  </a>
-</header>
-```
-
----
 
 ```bash
 ng g c about/about/links
@@ -367,22 +238,19 @@ const routes: Routes = [
 En `AboutComponent` :
 
 ```html
-<header class="sticky">
-  <a routerLink="links" class="button"> Tutorial Links </a>
-  <a routerLink="info" class="button"> More Info </a>
+<h3>About us</h3>
+<header>
+  <p>
+    <a routerLink="links"
+       class="button"> Tutorial Links </a>
+  </p>
+  <p>
+    <a routerLink="info"
+       class="button"> More Info </a>
+  </p>
 </header>
 <router-outlet></router-outlet>
 ```
-
----
-
-> Recap:
-
-# 3. Rutas anidadas
-
-## Children
-
-## RouterOutlet anidado
 
 ---
 
@@ -401,37 +269,25 @@ class: impact
 Dada esta estructura nuevos components
 
 ```bash
-ng g c about/about/authors
-ng g c about/about/authors/author
+ng g m courses --route=courses -m app-routing.module.ts
 ```
 
 ---
 
-Podemos gestionar dichas rutas en `about-routing.module.ts`
+Podemos gestionar dichas rutas en `app-routing.module.ts`
 
 ```typescript
-{
-  path: '',  component: AboutComponent,
-  children: [
-    {
-      path: 'links', component: LinksComponent
-    },
-    {
-      path: 'info', component: InfoComponent
-    },
-    {
-      path: 'authors', component: AuthorsComponent
-    },
-    {
-*     path: 'authors/:id', component: AuthorComponent
+const routes: Routes = [
+  {
+    path: ':slug',
+    component: CoursesComponent
     }
-  ]
-}
+];
 ```
 
 --
 
-Resuelve rutas como: _/authors/albertobasalo_ o _/authors/johndoe_
+Resuelve rutas como: _/courses/introduccion_ o _/courses/avanzado_
 
 ---
 
@@ -442,11 +298,14 @@ Contenido del fichero `author.component.ts` relacionado con la obtención del pa
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-export class AuthorComponent implements OnInit {
-  public authorId = '';
-  constructor(activateRoute: ActivatedRoute) {
-    this.authorId = activateRoute.snapshot.params.id;
+import { environment } from '../../environments/environment';
+export class CoursesComponent implements OnInit {
+  course: any;
+  constructor(route: ActivatedRoute) {
+    route.params.subscribe(params => {
+      const courseSlug = params.slug;
+      this.course = environment.courses.find(c => c.slug === courseSlug);
+    });
   }
   ngOnInit() {}
 }
@@ -454,40 +313,54 @@ export class AuthorComponent implements OnInit {
 
 Usamos la instancia `activateRoute` de la clase `ActivatedRoute` inyectada por el framework según veremos en el tema 5.
 
-Para acceder a datos de la URL activa y mostrar los datos en la vista
+Para acceder a datos de la URL activa y mostrar los datos del curso en la vista
 
 ```html
-<h2>Author profile</h2>
-<h3>{{ authorId }}</h3>
+<h3>👨‍🎓 {{ course.title }}</h3>
+<p>{{course.description}}</p>
+<p>
+  <a href="{{course.url}}"
+     target="_blank">{{course.url}}</a>
+</p>
+<p>
+  <ab-go-home></ab-go-home>
+</p>
 ```
 
 ---
 
-Enlazamos todo agregando una entrada en `AboutComponent` :
+Enlazamos todo agregando un par de entradas en `HomeComponent` :
 
 ```html
-<a routerLink="authors" class="button"> Credit Authors </a>
-```
-
---
-
-Y en `authors.component.html`
-
-```html
-<a routerLink="albertobasalo" class="button"> Alberto Basalo </a>
-<a routerLink="linustorvalds" class="button"> Linus Torvalds </a>
-<a routerLink="billgates" class="button"> Bill Gates </a>
+<h2> Welcome 🏡 !</h2>
+<nav>
+  <p>
+    <a routerLink="courses/introduccion">💻 Introducción</a>
+  </p>
+  <p>
+    <a routerLink="courses/avanzado">💻 Avanzado</a>
+  </p>
+</nav>
 ```
 
 ---
 
-> Recap:
+# Demostración en clase
 
-# 4. Parámetros
+> Mostrar módulos y rutas funcionales de infraestructura en `Angular-Budget`
 
-## Variables en la ruta
+---
 
-## ActivatedRoute
+
+# Práctica propuesta para alumnos
+
+> Crear módulos de funcionales en `Angular-Balance`
+> Empezar con las rutas básicas de la aplicación: `/`, `trasactions/new`, `trasactions/list`, `/transactions/:trasactionId`.
+
+- [ ] Crear un módulo ruta home y asignarle la ruta vacía `''`
+- [ ] Hacer lo mismo para el formulario de alta con la ruta `trasactions/new`
+- [ ] Y ahora para la ruta que muestra la lista. Probar con y si la palabra _list_
+- [ ] Por último una ruta paramétrica para mostrar una transacción concreta
 
 ---
 
