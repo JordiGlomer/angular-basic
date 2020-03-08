@@ -73,6 +73,7 @@ Se agrega al array de importaciones en `AppModule`
 })
 export class AppModule {}
 ```
+
 ---
 
 # 2. Componentes
@@ -217,11 +218,7 @@ y entonces `app.component.html` queda ridículamente simple:
 - El contenido de `app.component.html` irá a _Header, Main y Footer_
 - La propiedad `title` se moverá a `header.component.ts`
 
---
-
 - ¿y qué pasa con `<router-outlet></router-outlet>`?
-
---
 
 - Falla porque no es conocido en `LayoutModule`; hay que importarlo
 
@@ -407,7 +404,6 @@ AppComponent
 
 ---
 
-
 # Práctica propuesta para alumnos
 
 > Crear módulos de infraestructura en `Angular-Balance`
@@ -417,6 +413,7 @@ AppComponent
 - [ ] Crear un módulo `shared`
 
 ---
+
 > Next:
 
 # [Páginas y rutas Angular SPA](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/2-spa.md)

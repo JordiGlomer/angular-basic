@@ -79,7 +79,7 @@ ng g m not-found --route=not-found -m app-routing.module.ts
 El componente `HomeComponent` se asocia con la ruta vacía `''`
 El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
 
---_
+---
 
 ### RedirectTo
 
