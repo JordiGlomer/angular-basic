@@ -370,7 +370,7 @@ ng deploy --base-href=/angular-basic/
 
 > Next:
 
-# [Base para una aplicación Angular](https://academiabinaria.github.io/angular-basic/readme/1-base.html)
+# [Base para una aplicación Angular](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/1-base.md)
 
 ## Módulos
 

@@ -38,13 +38,13 @@ Material necesario
 
 # [0-Hello](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/0-hello.md)
 
-> 🚧 Work in process...
-
-# [1-Base](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/1-base.html)
+# [1-Base](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/1-base.md)
 
 ---
 
-# [2-SPA](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/2-spa.html)
+# [2-SPA](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/2-spa.md)
+
+> 🚧 Work in process...
 
 # [3-Data](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/3-data.html)
 
