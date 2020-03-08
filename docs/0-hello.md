@@ -65,15 +65,11 @@ cd unaAppMuyCorriente
 npm start
 ```
 
---
-
 ### 1.2.2 Minimalista
 
 ```console
 ng new minimalista -s -S -t
 ```
-
---
 
 ### 1.2.3 Profesional
 
@@ -100,16 +96,6 @@ ng new angular-basic -p ab --style css --routing
 cd angular-basic
 npm start
 ```
-
----
-
-> Recap:
-
-# 1 Angular y el CLI
-
-## Instalación de Angular CLI
-
-## Crear y ejecutar aplicaciones Angular
 
 ---
 
@@ -157,16 +143,6 @@ npm start
 2. Busca dentro de él una clase llamada `AppComponent`.
 3. Asígnale el saludo de rigor: `title = 'angular-basic' + ' hello world'`
 4. Guarda y comprueba que tu navegador **se actualiza automáticamente**.
-
----
-
-> Recap:
-
-# 2. Estructura de una aplicación Angular
-
-## Ficheros y carpetas principales
-
-## Edición de un Hola Mundo
 
 ---
 
@@ -266,16 +242,6 @@ cd dist/angular-basic
 http://localhost:4291/
 ```
 ---
-
-> Recap:
-
-# 3. Configuración
-
-## Configurar el CLI
-
-## Configurar el Workflow
-
-## Configurar la aplicación
 
 ---
 

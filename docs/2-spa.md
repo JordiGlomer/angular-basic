@@ -79,7 +79,7 @@ ng g m not-found --route=not-found -m app-routing.module.ts
 El componente `HomeComponent` se asocia con la ruta vacía `''`
 El componente `NotFoundComponent` se asocia con la ruta `'not-found'`
 
---
+--_
 
 ### RedirectTo
 
@@ -122,6 +122,7 @@ Por ejemplo el contenido de `NotFoundComponent` será
 ## 1.2 Router Link
 
 En el `src\app\shared\go-home\go-home.component.html`
+
 ```html
 <a routerLink=""> Go home 🏠</a>
 ```
@@ -254,8 +255,6 @@ En `AboutComponent` :
 
 ---
 
-class: impact
-
 # 4. Parámetros
 
 ## Variables en la ruta
@@ -284,8 +283,6 @@ const routes: Routes = [
     }
 ];
 ```
-
---
 
 Resuelve rutas como: _/courses/introduccion_ o _/courses/avanzado_
 
