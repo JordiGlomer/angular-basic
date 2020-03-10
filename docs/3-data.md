@@ -1,16 +1,4 @@
-title: 3-Data
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
----
-
-class: impact
-
-# {{title}}
+# 3-Data
 
 ## Formularios, tablas y modelos de datos en Angular
 
@@ -26,8 +14,6 @@ class: impact
 
 ---
 
-class: impact
-
 # 1. Binding
 
 ## Base
@@ -42,7 +28,7 @@ class: impact
 
 ## 1.0 Base
 
-Creamos una nueva ruta funcionalidad para la gestión de contactos. Requiere ruta, enlace, módulo y componente.
+Creamos una nueva ruta funcional para la gestión de contactos. Requiere ruta, enlace, módulo y componente.
 
 ```bash
 ng g m contacts --routing true --route contacts --module app-routing.module
@@ -56,8 +42,7 @@ En `app-routing` y en `contacts-routing`:
   // app-routing
   {
     path: 'contacts',
-    loadChildren: () => import('./3-data/contacts/contacts.module').then(m => m.ContactsModule)
-    // loadChildren: './contacts/contacts.module#ContactsModule'
+    loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
   },
   // contacts-routing
   {
@@ -68,14 +53,10 @@ En `app-routing` y en `contacts-routing`:
 
 ---
 
-En `HeaderComponent`
+En `main.component.html`
 
 ```html
-<a routerLink="contacts"
-    routerLinkActive="router-link-active"
-    class="button">
-  <span> 3 - Contacts</span>
-</a>
+<li><a routerLink="contacts">Forms</a></li>
 ```
 
 ---
@@ -85,11 +66,12 @@ En `HeaderComponent`
 > Para empezar agregamos algunas propiedades. En `contacts.component.ts`:
 
 ```typescript
-public header = 'Contacts';
-public description = 'Manage your contact list';
-public numContacts = 0;
-public counterClass = 'tag secondary';
-public formHidden = false;
+header = 'Contacts';
+description = 'Manage your contact list';
+numberOfContacts = 0;
+counterStyleColor = 'green';
+counterClass = 'warning';
+formHidden = false;
 ```
 
 ---
@@ -102,7 +84,7 @@ En `contacts.component.html` mostramos cabeceras con estilo
 <h3>
   {{ header }}: {{ description | uppercase }}
 </h3>
-<p [style.color]="'green'">You have <mark class="{{ counterClass }}">{{ numContacts }}</mark> contacts right now.</p>
+<p [style.color]="'green'">You have <mark class="{{ counterClass }}">{{ numberOfContacts }}</mark> contacts right now.</p>
 ```
 
 ---
@@ -125,27 +107,13 @@ En `contacts.component.html` también actuamos sobre la vista
   (click)="formHidden=true"
 />
 <form [ngClass]="{'hidden':formHidden}">
-  <fieldset><legend>Contact Form</legend></fieldset>
+  <fieldset>
+    <legend>Contact Form</legend>
+  </fieldset>
 </form>
 ```
 
 ---
-
-> Recap:
-
-# 1. Binding
-
-## Base
-
-## Directivas
-
-### Enlace del modelo hacia la vista
-
-### Enlace de la vista hacia el modelo
-
----
-
-class: impact
 
 # 2. Doble Binding
 
@@ -175,7 +143,7 @@ import { ContactsRoutingModule } from './contacts-routing.module';
   imports: [
     CommonModule,
     ContactsRoutingModule,
-*   FormsModule
+    FormsModule
   ]
 })
 export class ContactsModule { }
@@ -266,22 +234,6 @@ public contact = { name: '', isVIP: false, gender: '' };
 
 ---
 
-> Recap:
-
-# 2. Doble Binding
-
-## NgModel
-
-## Form
-
-### Enlace del modelo hacia la vista
-
-### Enlace de la vista hacia el modelo
-
----
-
-class: impact
-
 # 3. Estructuras
 
 ## \*ngFor
@@ -370,18 +322,6 @@ public contact = {
 
 ---
 
-> Recap:
-
-# 3. Estructuras
-
-## \*ngFor
-
-## \*ngIf
-
----
-
-class: impact
-
 # 4. Modelo y controlador
 
 ## Interfaces y modelos
@@ -441,14 +381,14 @@ public contacts: Contact[] = [];
 No solo propiedades, también métodos
 
 ```typescript
-public saveContact() {
+saveContact() {
   this.contacts.push({ ...this.contact });
   this.updateCounter();
 }
 
 private updateCounter() {
-  this.numContacts = this.contacts.length;
-  this.counterClass = this.numContacts === 0 ? 'tag secondary' : 'tag primary';
+  this.numberOfContacts = this.contacts.length;
+  this.counterClass = this.numberOfContacts === 0 ? 'warning' : 'success';
 }
 ```
 
@@ -495,11 +435,11 @@ public ngOnInit() {
     <input value="Delete" type="button" (click)="deleteContact(contact)" />
   </li>
 </ul>
-<ng-template #empty> <i>No data yet</i> </ng-template>
+<ng-template #empty> <i>No contacts yet</i> </ng-template>
 ```
 
 ```typescript
-public deleteContact(contact: Contact) {
+deleteContact(contact: Contact) {
   this.contacts = this.contacts.filter(c => c.name !== contact.name);
   this.updateCounter();
 }
@@ -510,15 +450,6 @@ public deleteContact(contact: Contact) {
 ### Recursos
 
 [Angular Mastery: Template Syntax](https://blog.angularindepth.com/angular-mastery-template-syntax-194bffe2ad6f)
-
----
-> Recap
-
-# 4. Modelo y controlador
-
-## Interfaces y modelos
-
-## ViewModel en el controlador
 
 ---
 

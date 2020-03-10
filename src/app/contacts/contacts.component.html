@@ -1,0 +1,81 @@
+<h3>
+  {{ header }}: {{ description | uppercase }}
+</h3>
+<p [style.color]="counterStyleColor">You have <mark
+        class="{{ counterClass }}">{{ numberOfContacts }}</mark>
+  contacts right now.</p>
+<input value="Show Form"
+       type="button"
+       (click)="formHidden=false" />
+<input value="Hide Form"
+       type="button"
+       (click)="formHidden=true" />
+<form [ngClass]="{'hidden':formHidden}">
+  <fieldset>
+    <legend>Contact Form</legend>
+    <section>
+      <label for="name">Name</label>
+      <input name="name"
+             type="text"
+             [(ngModel)]="contact.name"
+             placeholder="Contact name" />
+    </section>
+    <section>
+      <label for="isVIP">Is V.I.P.</label>
+      <input name="isVIP"
+             type="checkbox"
+             [(ngModel)]="contact.isVIP" />
+    </section>
+    <section>
+      <label for="gender">Gender</label>
+      <input name="gender"
+             value="m"
+             type="radio"
+             [(ngModel)]="contact.gender" />
+      <i>Male</i>
+      <input name="gender"
+             value="f"
+             type="radio"
+             [(ngModel)]="contact.gender" />
+      <i>Female</i>
+    </section>
+    <section>
+      <label for="workStatus">Work Status: </label>
+      <select name="workStatus"
+              [(ngModel)]="contact.workStatus">
+        <option *ngFor="let status of workStatuses"
+                [value]="status.id">
+          <span>{{ status.description }}</span>
+        </option>
+      </select>
+    </section>
+    <section *ngIf="contact.workStatus=='3'; else education">
+      <label for="company">Company Name</label>
+      <input name="company"
+             type="text"
+             [(ngModel)]="contact.company" />
+    </section>
+    <ng-template #education>
+      <section>
+        <label for="education">Education</label>
+        <input name="education"
+               type="text"
+               [(ngModel)]="contact.education"
+               placeholder="Education" />
+      </section>
+    </ng-template>
+    <input value="Save"
+           type="submit"
+           (click)="saveContact()" />
+  </fieldset>
+</form>
+<pre>{{ contact | json }}</pre>
+<ul *ngIf="contacts.length>0; else empty">
+  <li *ngFor="let contact of contacts">
+    <span>{{ contact.name }}</span>
+    <input value="Delete"
+           type="button"
+           (click)="deleteContact(contact)" />
+  </li>
+</ul>
+<ng-template #empty> <i>No contacts yet</i> </ng-template>

@@ -1,0 +1,12 @@
+.warning {
+  background-color: whitesmoke;
+  color: darkorange;
+}
+.success {
+  background-color: whitesmoke;
+  color: green;
+}
+
+.hidden {
+  display: none;
+}

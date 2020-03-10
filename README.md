@@ -44,11 +44,12 @@ Material necesario
 
 # [2-SPA](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/2-spa.md)
 
-> 🚧 Work in process...
 
 # [3-Data](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/3-data.html)
 
 ---
+
+> 🚧 Work in process...
 
 # [4-Flow](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/4-flow.html)
 
