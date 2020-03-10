@@ -1,3 +1,7 @@
+---
+marp: true
+---
+
 # 2-SPA
 
 ## Páginas y rutas Angular SPA
@@ -307,6 +311,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {}
 }
 ```
+---
 
 Usamos la instancia `activateRoute` de la clase `ActivatedRoute` inyectada por el framework según veremos en el tema 5.
 
