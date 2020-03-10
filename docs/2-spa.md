@@ -353,7 +353,6 @@ Enlazamos todo agregando un par de entradas en `HomeComponent` :
 
 ---
 
-
 # Práctica propuesta para alumnos
 
 > Crear módulos de funcionales en `Angular-Balance`

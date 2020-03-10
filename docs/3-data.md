@@ -452,6 +452,21 @@ deleteContact(contact: Contact) {
 [Angular Mastery: Template Syntax](https://blog.angularindepth.com/angular-mastery-template-syntax-194bffe2ad6f)
 
 ---
+# Demostración en clase
+
+> Alta y listado de proyectos `{ date, name, status, amount }`
+
+---
+
+# Práctica propuesta para alumnos
+
+> Alta de transacciones: `{ date, description, kind, amount }`.
+
+- [ ] Formulario para entrada de al menos cuatro campos
+- [ ] Validaciones básicas
+- [ ] Edición de datos previos
+
+---
 
 > Next:
 
