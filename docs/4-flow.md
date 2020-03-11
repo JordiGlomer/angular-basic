@@ -1,16 +1,4 @@
-title: 4-Flow
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
----
-
-class: impact
-
-# {{title}}
+# 4-Flow
 
 ## Flujo de datos entre componentes Angular
 
@@ -24,8 +12,6 @@ class: impact
 
 ---
 
-class: impact
-
 # 1. Comunicación entre componentes
 
 ## Necesidad de comunicación
@@ -38,11 +24,8 @@ class: impact
 
 > Aplicaciones Complejas
 
---
-
 - Principio de desarrollo _Divide y Vencerás_
 - Múltiples páginas SPA
--
 
 ---
 
@@ -53,18 +36,6 @@ class: impact
 - Comunicar componentes entre **estructuras dinámicas**
 
 ---
-
-> Recap:
-
-# 1. Comunicación entre componentes
-
-## Necesidad de comunicación
-
-## Escenarios
-
----
-
-class: impact
 
 # 2. Contenedor / Presentadores
 
@@ -87,7 +58,7 @@ Es una elección de arquitectura que promueve:
   - **Contenedor**: gestión de datos
   - **Presentadores**: interacción con usuario
 
---
+---
 
 ### Reutilización de presentadores
 
@@ -97,35 +68,158 @@ Es una elección de arquitectura que promueve:
 
 ### Contenedor y presentadores
 
-```console
-ng g m car --routing true --route car --module app-routing.module
-ng g c car/car/display
-ng g c car/car/pedals
+```bash
+ng g m car --route car --module app-routing.module
+ng g c car/display_presenter
+ng g c car/pedals_presenter
 ```
 
+`src\app\layout\shell\main\main.component.html`
 ```html
-<a routerLink="car"
-    routerLinkActive="router-link-active"
-    class="button">
-  <span> 4 - Car</span>
-</a>
+<li><a routerLink="car">Flow</a></li>
+```
+---
+
+## 2.2 Envío hacia el presentador con @Input()
+
+Envío de información **desde el contenedor hacia el presentador**
+
+Usa `[propiedad]="expresion"` en el contenedor
+
+Y `@Input() propiedad` en el presentador
+
+---
+
+### Recepción en el controlador
+
+```typescript
+export class DisplayPresenterComponent implements OnInit {
+  @Input() model: string;
+  @Input() currentSpeed: number;
+  @Input() topSpeed: number;
+  @Input() units: string;
+  constructor() {}
+  ngOnInit() {}
+  getSpeedClass = () =>
+    this.currentSpeed < this.getThreshold() ? 'good' : 'warning';
+  private getThreshold = () => this.topSpeed * 0.8;
+}
 ```
 
 ---
 
+### Presentación en la vista
+
+```html
+<h3> {{ model }} </h3>
+<h4> Top speed: {{ topSpeed | number:'1.0-0' }}</h4>
+<div>
+  <div [ngClass]="getSpeedClass()">
+    {{ currentSpeed | number:'1.2-2' }} {{ units }}
+  </div>
+  <progress [value]="currentSpeed"
+            [max]="topSpeed">
+  </progress>
+</div>
+```
+---
+
+```css
+.good {
+  background-color: green;
+}
+.warning {
+  background-color: red;
+}
+```
+---
+
+`src\app\car\car.component.html`
+
+```html
+<ab-display-presenter model="tesla"
+                      currentSpeed="60"
+                      topSpeed="200"
+                      units="km/h">
+</ab-display-presenter>
+```
+
+---
+
+## 2.3 @Output()
+
+Envío de información **desde el presentador hacia el Contenedor**
+
+Usa `(evento)="instruccion"` en el Contenedor
+
+Y `@Output() evento = new EventEmitter<any>()` en el presentador
+
+---
+
+### Emisión desde el controlador
+
+```typescript
+export class PedalsPresenterComponent implements OnInit {
+  @Input() brakeDisabled: boolean;
+  @Input() throttleDisabled: boolean;
+  @Output() brake = new EventEmitter<number>();
+  @Output() throttle = new EventEmitter<number>();
+
+  constructor() {}
+
+  ngOnInit() {}
+}
+```
+
+---
+
+### Suscripción desde la vista
+
+```html
+<h4>
+  Pedals:
+</h4>
+<form>
+  <input value="brake"
+    class="secondary"
+    type="button"
+    [disabled]="brakeDisabled"
+    (click)="brake.emit(1)"/>
+  <input value="throttle"
+    class="tertiary"
+    type="button"
+    [disabled]="throttleDisabled"
+    (click)="throttle.emit(1)"/>
+</form>
+```
+---
+
+```html
+<ab-pedals-presenter brakeDisabled="true"
+                     throttleDisabled=""
+                     (brake)="+1"
+                     (throttle)="-1">
+</ab-pedals-presenter>
+```
+
+
+---
+
+## 2.4 El contenedor
+
 ### Container
 
 ```html
-<app-display [model]="car.name"
-             [currentSpeed]="car.currentSpeed"
-             [topSpeed]="car.maxSpeed"
-             [units]="'Km/h'">
-</app-display>
-<app-pedals (brake)="onBrake($event)"
-            [disableBrake]="disableBrake"
-            (throttle)="onThrottle($event)"
-            [disableThrottle]="disableThrottle">
-</app-pedals>
+<ab-display-presenter [model]="car.name"
+                      [currentSpeed]="car.currentSpeed"
+                      [topSpeed]="car.maxSpeed"
+                      [units]="'Km/h'">
+</ab-display-presenter>
+<ab-pedals-presenter (brake)="onBrake($event)"
+                     [brakeDisabled]="disableBrake"
+                     (throttle)="onThrottle($event)"
+                     [throttleDisabled]="disableThrottle">
+</ab-pedals-presenter>
 ```
 
 ---
@@ -133,13 +227,13 @@ ng g c car/car/pedals
 ### Manejo de datos
 
 ```typescript
-public car: CarModel;
-public disableBrake: boolean;
-public disableThrottle: boolean;
+car: CarModel;
+disableBrake: boolean;
+disableThrottle: boolean;
 
 constructor() {}
 
-public ngOnInit() {
+ngOnInit() {
   this.car = { name: 'Roadster', maxSpeed: 120, currentSpeed: 0 };
   this.checkLimits();
 }
@@ -161,12 +255,12 @@ private checkLimits() {
 ### Lógica de negocios
 
 ```typescript
-public onBrake(drive: number) {
+onBrake(drive: number) {
   this.car.currentSpeed -= this.getDelta(drive);
   this.checkLimits();
 }
 
-public onThrottle(drive: number) {
+onThrottle(drive: number) {
   this.car.currentSpeed += this.getDelta(drive);
   this.checkLimits();
 }
@@ -175,7 +269,7 @@ private getDelta = (drive: number) =>
   drive + (this.car.maxSpeed - this.car.currentSpeed) / 10
 ```
 
---
+--_
 
 ```typescript
 export interface CarModel {
@@ -186,117 +280,6 @@ export interface CarModel {
 ```
 
 ---
-
-## 2.3 Envío hacia el presentador con @Input()
-
-Envío de información **desde el contenedor hacia el presentador**
-
-Usa `[propiedad]="expresion"` en el contenedor
-
-Y `@Input() propiedad` en el presentador
-
----
-
-### Recepción en el controlador
-
-```typescript
-export class DisplayComponent implements OnInit {
-  @Input() public model: string;
-  @Input() public currentSpeed: number;
-  @Input() public topSpeed: number;
-  @Input() public units: string;
-  constructor() {}
-  ngOnInit() {}
-  public getSpeedClass = () =>
-    this.currentSpeed < this.getThreshold() ? 'primary' : 'secondary';
-  private getThreshold = () => this.topSpeed * 0.8;
-}
-```
-
----
-
-### Presentación en la vista
-
-```html
-<h2> {{ model }} </h2>
-<h3> Top speed: {{ topSpeed | number:'1.0-0' }}</h3>
-<div class="card">
-  <div class="section">
-    {{ currentSpeed | number:'1.2-2' }} {{ units }}
-  </div>
-  <progress [value]="currentSpeed"
-            [ngClass]="getSpeedClass()"
-            [max]="topSpeed">
-  </progress>
-</div>
-```
-
----
-
-## 2.4 @Output()
-
-Envío de información **desde el presentador hacia el Contenedor**
-
-Usa `(evento)="instruccion"` en el Contenedor
-
-Y `@Output() evento = new EventEmitter<any>()` en el presentador
-
----
-
-### Emisión desde el controlador
-
-```typescript
-export class PedalsComponent implements OnInit {
-  @Input() public disableBrake: boolean;
-  @Input() public disableThrottle: boolean;
-  @Output() public brake = new EventEmitter<number>();
-  @Output() public throttle = new EventEmitter<number>();
-
-  constructor() {}
-
-  ngOnInit() {}
-}
-```
-
----
-
-### Suscripción desde la vista
-
-```html
-<h3>
-  Pedals:
-</h3>
-<form>
-  <input value="brake"
-    class="secondary"
-    type="button"
-    [disabled]="disableBrake"
-    (click)="brake.emit(1)"/>
-  <input value="throttle"
-    class="tertiary"
-    type="button"
-    [disabled]="disableThrottle"
-    (click)="throttle.emit(1)"/>
-</form>
-```
-
----
-
-> Recap:
-
-# 2. Contenedor / Presentadores
-
-## El patrón Contenedor / Presentadores
-
-## El contenedor
-
-## Envío hacia el presentador con @Input()
-
-## Respuesta del presentador con @Output()
-
----
-
-class: impact
 
 # 3. Otras comunicaciones
 
@@ -310,38 +293,49 @@ class: impact
 
 - A través del `RouterModule`
 
-En `about-routing.module`
+En `src\app\courses\courses-routing.module.ts`
 
 ```typescript
-{
-* path: 'authors/:id',
-  component: AuthorComponent
-}
+const routes: Routes =
+[
+  {
+    path: ':slug',
+    component: CoursesComponent
+  }
+];
 ```
 
-En `authors-component.html`
+En `home-component.html`
 
 ```html
-<a routerLink="albertobasalo"> <span> Alberto Basalo</span> </a>
-<a routerLink="johndoe"> <span> John Doe</span> </a>
+<p>
+  <a routerLink="courses/introduccion">💻 Introducción</a>
+</p>
+<p>
+  <a routerLink="courses/avanzado">💻 Avanzado</a>
+</p>
 ```
 
 ---
 
-En `author.component.ts`
+En `courses.component.ts`
 
 ```typescript
-export class AuthorComponent implements OnInit {
-  public authorId = '';
-  constructor(activatedRoute: ActivatedRoute) {
-*   this.authorId = activatedRoute.snapshot.params['id'];
+export class CoursesComponent implements OnInit {
+  course: any;
+  constructor(route: ActivatedRoute) {
+    route.params.subscribe(params => {
+      const courseSlug = params.slug;
+      this.course = environment.courses.find(c => c.slug === courseSlug);
+    });
   }
-  ngOnInit() {}
+  ngOnInit(): void {}
 }
 ```
-
-
 ---
+
+<!-- 🚧 W.I.P. 🚧 -->
+
 
 ## 3.2 Comunicación entre estructuras desacopladas
 

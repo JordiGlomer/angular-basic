@@ -1,0 +1,10 @@
+<ab-display-presenter [model]="car.name"
+                      [currentSpeed]="car.currentSpeed"
+                      [topSpeed]="car.maxSpeed"
+                      [units]="'Km/h'">
+</ab-display-presenter>
+<ab-pedals-presenter (brake)="onBrake($event)"
+                     [brakeDisabled]="disableBrake"
+                     (throttle)="onThrottle($event)"
+                     [throttleDisabled]="disableThrottle">
+</ab-pedals-presenter>

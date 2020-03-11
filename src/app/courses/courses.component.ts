@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class CoursesComponent implements OnInit {
   course: any;
+
   constructor(route: ActivatedRoute) {
     route.params.subscribe(params => {
       const courseSlug = params.slug;

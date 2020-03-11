@@ -1,0 +1,15 @@
+<h4>
+  Pedals:
+</h4>
+<form>
+  <input value="brake 🐌"
+         class="secondary"
+         type="button"
+         [disabled]="brakeDisabled"
+         (click)="brake.emit(1)" />
+  <input value="throttle 🐰"
+         class="tertiary"
+         type="button"
+         [disabled]="throttleDisabled"
+         (click)="throttle.emit(1)" />
+</form>
