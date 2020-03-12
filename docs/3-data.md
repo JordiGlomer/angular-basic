@@ -1,3 +1,7 @@
+---
+marp: true
+---
+
 # 3-Data
 
 ## Formularios, tablas y modelos de datos en Angular
