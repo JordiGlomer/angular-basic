@@ -358,13 +358,10 @@ Lo que pasa dentro de _main_ no se conoce en _header_...
 
 ---
 
-> Recap:
+# Práctica propuesta para alumnos
+# Demostración en clase
 
-# 3. Otras comunicaciones
-
-## Comunicación entre distintas páginas
-
-## Comunicación entre estructuras desacopladas
+- Usar componentes presentadores para alta y listado
 
 ---
 

@@ -52,11 +52,11 @@ Material necesario
 
 # [4-Flow](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/4-flow.md)
 
-> 🚧 Work in process...
-
 # [5-Inject](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/5-inject.html)
 
 ---
+
+> 🚧 Work in process...
 
 # [6-Http](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/6-http.html)
 

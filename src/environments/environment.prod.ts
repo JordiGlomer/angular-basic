@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  unitsCulture: 'metric',
   courses: [
     {
       slug: 'introduccion',

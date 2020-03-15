@@ -1,0 +1,19 @@
+<h2> Dynamic Culture Converter. </h2>
+<h3> From {{ source }} to {{ target }} </h3>
+<form>
+  <fieldset>
+    <section>
+      <label for="sourceDistance">Distance</label>
+      <input name="sourceDistance"
+             type="number"
+             [(ngModel)]="sourceDistance"
+             placeholder="0" />
+    </section>
+  </fieldset>
+  <input value="Convert"
+         type="button"
+         (click)="convert()">
+</form>
+<section>
+  <h4>Distance {{ targetDistance | number:'1.2-2' }} </h4>
+</section>

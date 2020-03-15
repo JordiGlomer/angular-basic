@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
   { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },
   { path: 'car', loadChildren: () => import('./car/car.module').then(m => m.CarModule) },
+  { path: 'converter', loadChildren: () => import('./converter/converter.module').then(m => m.ConverterModule) },
   {
     path: '**',
     redirectTo: 'not-found',
