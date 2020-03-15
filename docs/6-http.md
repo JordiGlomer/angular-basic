@@ -1,16 +1,4 @@
-title: 6-http
-class: animation-fade
-layout: true
-
-.bottom-bar[
-{{title}}
-]
-
----
-
-class: impact
-
-# {{title}}
+# 6-http
 
 ## Comunicaciones http en Angular
 
@@ -23,8 +11,6 @@ class: impact
 # 3. Interceptores
 
 ---
-
-class: impact
 
 # 1. El servicio HttpClient
 
@@ -41,15 +27,13 @@ class: impact
 El módulo de comunicaciones
 
 ```console
-ng g m rates --routing true --routes rates --module app.routing.module
+ng g m money --route money --module app-routing.module
 ```
 
 `header.component.html`
 
 ```html
-<a routerLink="rates" class="button">
-  <span> Rates</span>
-</a>
+<li><a routerLink="money">Http</a></li>
 ```
 
 ---
@@ -59,14 +43,14 @@ ng g m rates --routing true --routes rates --module app.routing.module
 ### Importación
 
 ```typescript
-*import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [RatesComponent],
-* imports: [HttpClientModule]
+  declarations: [MoneyComponent],
+  imports: [HttpClientModule]
 })
-export class RatesModule { }
+export class MoneyModule { }
 ```
 
 ---
@@ -74,16 +58,16 @@ export class RatesModule { }
 ### Dependencia
 
 ```typescript
-*import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-rates',
-  templateUrl: './rates.component.html',
+  selector: 'ab-money',
+  templateUrl: './money.component.html',
   styles: []
 })
-export class RatesComponent implements OnInit {
-* constructor(private httpClient: HttpClient) {}
+export class MoneyComponent implements OnInit {
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {}
 }
@@ -94,9 +78,9 @@ export class RatesComponent implements OnInit {
 ## 1.2 Obtención de datos
 
 ```typescript
-export class RatesComponent implements OnInit {
+export class MoneyComponent implements OnInit {
   private urlapi = 'https://api.exchangeratesapi.io/latest';
-  public currentEuroRates: any = null;
+  currentEuroRates: any = null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -107,37 +91,11 @@ export class RatesComponent implements OnInit {
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.urlapi}?symbols=${currencies}`;
-    this.httpClient
-*     .get<ExchangeRates>(url)
-      .subscribe(apiResult => (this.currentEuroRates = apiResult));
+    this.httpClient.get<any>(url).subscribe(apiResult => (this.currentEuroRates = apiResult));
   }
 }
 ```
 
----
-
-> tipos de datos
-
-
-```typescript
-export interface ExchangeRates {
-  base: string;
-  rates: Rates;
-  date: string;
-}
-export interface Rates {
-  CHF: number;
-  USD: number;
-  JPY: number;
-  GBP: number;
-}
-export interface RateByDate {
-  date: string;
-  currency: string;
-  euros: number;
-  _id?: string;
-}
-```
 ---
 
 ### Presentación en vista
@@ -150,38 +108,14 @@ export interface RateByDate {
 
 ---
 
+> 🚧 Work in process...
+
 ## 1.3 Envío de datos
 
-```typescript
-export class RatesComponent implements OnInit {
-  private ratesByDateApi = 'https://api-base.herokuapp.com/api/pub/rates';
 
-  public postRatesByDate() {
-    const ratesByDate: RateByDate[] = this.transformExchangeRates();
-    ratesByDate.forEach(rate =>
-      this.httpClient.post<RateByDate>(this.ratesByDateApi, rate).subscribe()
-    );
-  }
-
-  private transformExchangeRates(): RateByDate[] {
-    const currentDate = this.currentEuroRates.date;
-    const currentRates = this.currentEuroRates.rates;
-    const ratesByDate = Object.keys(currentRates).map((keyRate: string) => ({
-      date: currentDate,
-      currency: keyRate,
-      euros: currentRates[keyRate]
-    }));
-    return ratesByDate;
-  }
-}
-```
 ---
 
 ### Presentación en vista
-
-```html
-<input value="Save Rates" type="button" (click)="postRatesByDate()" />
-```
 
 ---
 
@@ -189,56 +123,11 @@ export class RatesComponent implements OnInit {
 
 ### Refresco
 
-```typescript
-export class RatesComponent implements OnInit {
- private ratesByDateApi = 'https://api-base.herokuapp.com/api/pub/rates';
- public ratesByDate: RateByDate[] = null;
-
-
- public getRatesByDate() {
-    this.httpClient
-      .get<RateByDate[]>(this.ratesByDateApi)
-      .subscribe(apiResult => (this.ratesByDate = apiResult));
-  }
-}
-```
-
-```html
-<input value="Refresh" type="button" (click)="getRatesByDate()" />
-<pre>{{ ratesByDate | json }}</pre>
-```
-
 ---
 
 ### Borrado
 
-```typescript
-  public deleteRatesByDate() {
-    this.httpClient.delete(this.ratesByDateApi).subscribe();
-  }
-```
-
-```html
-<input value="Delete Rates by Date" type="button" (click)="deleteRatesByDate()" />
-```
-
 ---
-
-> Recap:
-
-# 1. El servicio HttpClient
-
-## Importación y declaración de servicios
-
-## Obtención de datos
-
-## Envío de datos
-
-## Actualización de datos
-
----
-
-class: impact
 
 # 2. Observables
 
@@ -249,15 +138,6 @@ class: impact
 ## operators
 
 ---
-
-```
-ng g c rates/obserates
-{
-  path: 'observables',
-  component: ObseratesComponent
-}
-<p><a [routerLink]="['observables']">Observables</a></p>
-```
 
 ---
 
@@ -279,7 +159,7 @@ En el controlador se exponen Observables
 
 ```typeScript
   private ratesApi = 'https://api.exchangeratesapi.io/latest';
-* public currentEuroRates$: Observable<ExchangeRates> = null;
+  public currentEuroRates$: Observable<ExchangeRates> = null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -290,7 +170,7 @@ En el controlador se exponen Observables
   private getCurrentEuroRates() {
     const currencies = 'USD,GBP,CHF,JPY';
     const url = `${this.ratesApi}?symbols=${currencies}`;
-*   this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url);
+    this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url);
   }
 ```
 > No es necesaria la suscripción en código
@@ -302,22 +182,7 @@ En el controlador se exponen Observables
 ### Tuberías en RxJS .pipe()
 
 ```typescript
-*public myRates$: Observable<MyRate[]> = null;
-private getCurrentEuroRates() {
-  const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
-  this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url);
-* this.ratesByDate$ = this.currentEuroRates$.pipe(map(this.transformData));
-}
-private transformData(exchangeRates: ExchangeRates): RateByDate[] {
-  const currentDate = exchangeRates.date;
-  const currentRates = exchangeRates.rates;
-  const ratesByDate = Object.keys(currentRates).map((keyRate: string) => ({
-    date: currentDate,
-    currency: keyRate,
-    euros: currentRates[keyRate]
-  }));
-  return ratesByDate;
-}
+
 ```
 
 ---
@@ -332,41 +197,10 @@ El consumo sigue igual... pero...
 --
 
 ```typescript
-private getCurrentEuroRates() {
-const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
-  this.currentEuroRates$ = this.httpClient.get(url)
-*     .pipe(share());
-  this.ratesByDate$ = this.currentEuroRates$
-      .pipe(map(this.transformData));
-}
-private getEuroRatesPlus() {
-  const url = `${this.ratesApi}?symbols=USD,GBP,CHF,JPY`;
-  this.currentEuroRates$ = this.httpClient.get<ExchangeRates>(url)
-*   .pipe(share());
-  this.ratesByDate$ = this.currentEuroRates$
-*   .pipe(
-      tap(d => console.log(d)),
-      map(this.transformData),
-      tap(t => console.log(t))
-    );
-}
+
 ```
 
 ---
-
-> Recap:
-
-# 2. Observables
-
-## Async
-
-## pipe
-
-## operators
-
----
-
-class: impact
 
 # 3. Interceptores
 
@@ -442,7 +276,7 @@ export class AuditInterceptorService implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler){
     const started = Date.now();
     return next.handle(req)
-*     .pipe(
+     .pipe(
         filter((event: HttpEvent<any>) => event instanceof HttpResponse),
         tap((resp: HttpResponse<any>) => this.auditEvent(resp, started))
       );
@@ -457,17 +291,6 @@ export class AuditInterceptorService implements HttpInterceptor {
 }
 ```
 
----
-
-> Recap:
-
-# 3. Interceptores
-
-## La interfaz HttpInterceptor
-
-## Inversión del control vía token
-
-## Un auditor de llamadas
 ---
 
 > Next:

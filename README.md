@@ -52,7 +52,7 @@ Material necesario
 
 # [4-Flow](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/4-flow.md)
 
-# [5-Inject](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/5-inject.html)
+# [5-Inject](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/5-inject.md)
 
 ---
 

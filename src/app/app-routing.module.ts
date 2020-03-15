@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },
   { path: 'car', loadChildren: () => import('./car/car.module').then(m => m.CarModule) },
   { path: 'converter', loadChildren: () => import('./converter/converter.module').then(m => m.ConverterModule) },
+  { path: 'money', loadChildren: () => import('./money/money.module').then(m => m.MoneyModule) },
   {
     path: '**',
     redirectTo: 'not-found',
