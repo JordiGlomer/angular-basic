@@ -108,7 +108,7 @@ export class MoneyComponent implements OnInit {
 
 ---
 
-> 🚧 Work in process...
+> 🎪 Demo time
 
 ## 1.3 Envío de datos
 
@@ -128,6 +128,8 @@ export class MoneyComponent implements OnInit {
 ### Borrado
 
 ---
+
+> 🚧 Work in progress... Moved to 7-watch.
 
 # 2. Observables
 

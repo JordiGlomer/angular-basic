@@ -56,7 +56,7 @@ Material necesario
 
 ---
 
-> 🚧 Work in process...
+> 🚧 Work in progress...
 
 # [6-Http](https://github.com/AcademiaBinaria/angular-basic/blob/master/docs/6-http.html)
 
