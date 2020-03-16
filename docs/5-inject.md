@@ -24,7 +24,7 @@ Módulo y componente
 ng g m converter --route converter --module app-routing.module
 ```
 
-`header.component.html`
+`main.component.html`
 
 ```html
 <li><a routerLink="converter">Converter</a></li>
