@@ -219,8 +219,32 @@ no_hurry.subscribe(r=> console.log(r));
 
 ## 2.2 Un Store de notificaciones
 
-```typescript
+```bash
+ng g m rockets/nasa --route nasa --module rockets/rockets-routing.module
+ng g c rockets/nasa/houston
+ng g c rockets/nasa/florida
+```
 
+```html
+<h3>NASA missions communication</h3>
+<ab-houston></ab-houston>
+<ab-florida></ab-florida>
+```
+
+```typescript
+export class MissionsComunicationService {
+  private messages: object[] = [{ icon: '👩‍🚀', subject: 'Crew on board' }];
+  private messages$ = new BehaviorSubject<any[]>(this.messages);
+
+  constructor() {}
+
+  public getMessages$ = () => this.messages$.asObservable();
+
+  public sendMessage = (message: object) => {
+    this.messages.push(message);
+    this.messages$.next(this.messages);
+  };
+}
 ```
 
 ---
@@ -231,8 +255,29 @@ no_hurry.subscribe(r=> console.log(r));
 
 Dependencia y uso del servicio del almacén para emisión de notificaciones
 
-```typescript
+```html
+<h4>Houston mission control</h4>
+<p><button> Start count down 🏁</button></p>
+<p><button> Ignition 🔥</button></p>
+<p><button> Abort 🛑</button></p>
+```
 
+```typescript
+export class HoustonComponent implements OnInit {
+  constructor(private missionsComunicationService: MissionsComunicationService) {}
+
+  ngOnInit(): void {}
+
+  onStartClick() {
+    this.missionsComunicationService.sendMessage({ icon: '🏁', subject: 'Start count down' });
+  }
+  onIgnitionClick() {
+    this.missionsComunicationService.sendMessage({ icon: '🔥', subject: 'Ignition' });
+  }
+  onAbortClick() {
+    this.missionsComunicationService.sendMessage({ icon: '🛑', subject: 'Abort' });
+  }
+}
 ```
 
 ---
@@ -241,11 +286,25 @@ Dependencia y uso del servicio del almacén para emisión de notificaciones
 
 Recepción de cambios, no importa el orden de subscripción
 
-```html
+```typescript
+export class FloridaComponent implements OnInit {
+  messages$: Observable<any>;
 
+  constructor(private missionsComunicationService: MissionsComunicationService) {}
+
+  ngOnInit(): void {
+    this.messages$ = this.missionsComunicationService.getMessages$();
+  }
+}
 ```
 
----
+```html
+<h4>Florida launch pad</h4>
+<p>📋 Mission log</p>
+<ul>
+  <li *ngFor="let message of messages$ | async">{{ message }}</li>
+</ul>
+```
 
 ---
 

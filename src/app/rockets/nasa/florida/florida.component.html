@@ -1,0 +1,5 @@
+<h4>Florida launch pad</h4>
+<p>📋 Mission log</p>
+<ul>
+  <li *ngFor="let message of messages$ | async">{{ message.icon }} - {{ message.subject}}</li>
+</ul>

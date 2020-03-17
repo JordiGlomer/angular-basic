@@ -7,13 +7,25 @@ const routes: Routes = [
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule),
   },
-  { path: 'courses', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule) },
+  {
+    path: 'courses',
+    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
+  },
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
-  { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },
+  {
+    path: 'contacts',
+    loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule),
+  },
   { path: 'car', loadChildren: () => import('./car/car.module').then(m => m.CarModule) },
-  { path: 'converter', loadChildren: () => import('./converter/converter.module').then(m => m.ConverterModule) },
+  {
+    path: 'converter',
+    loadChildren: () => import('./converter/converter.module').then(m => m.ConverterModule),
+  },
   { path: 'money', loadChildren: () => import('./money/money.module').then(m => m.MoneyModule) },
-  { path: 'rockets', loadChildren: () => import('./rockets/rockets.module').then(m => m.RocketsModule) },
+  {
+    path: 'rockets',
+    loadChildren: () => import('./rockets/rockets.module').then(m => m.RocketsModule),
+  },
   {
     path: '**',
     redirectTo: 'not-found',
