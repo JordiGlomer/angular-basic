@@ -1,0 +1,11 @@
+<h3> Next 5 rocket launches </h3>
+<!-- <pre>{{ nextLaunches$ | async | json }}</pre> -->
+<ul *ngIf="nextLaunches$ | async as nextLaunches; else loading">
+  <li *ngFor="let launch of nextLaunches"
+      [style.color]="launch.statusColor">
+    <b>{{ launch.name }}</b><i>{{ launch.scheduled }}</i>
+  </li>
+</ul>
+<ng-template #loading>
+  <i>Loading rocket data... </i>
+</ng-template>

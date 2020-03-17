@@ -27,7 +27,7 @@ ng g m converter --route converter --module app-routing.module
 `main.component.html`
 
 ```html
-<li><a routerLink="converter">Converter</a></li>
+<li><a routerLink="converter">Inject</a></li>
 ```
 
 ---
