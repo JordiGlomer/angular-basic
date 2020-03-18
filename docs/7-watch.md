@@ -10,7 +10,7 @@
 
 ---
 
-# 1. Observables para monitorizar datos
+# 1. Observables para presentar datos
 
 ## Async
 
@@ -159,7 +159,11 @@ private getNextLaunches() {
         statusColor: launch.status === 1 ? 'green' : 'red',
       }))
     ),
-    tap(rockets => console.log('num rockets:' + rockets.length))
+    tap(rockets => console.log('num rockets:' + rockets.length)),
+    tap(() => console.log('ha pasado algo')),
+    map(()=>{
+      const a =2;
+    })
   );
 }
 ```
@@ -187,8 +191,10 @@ Un efecto secundario
 ```typescript
 value$ = of(new Date().getMilliseconds());
 value$.subscribe(r=> console.log(r));
+
 stream$ = from([1, 'two', '***']);
 stream$.subscribe(r=> console.log(r));
+
 list$ = of(['N', 'S', 'E', 'W']);
 list$.subscribe(r=> console.log(r));
 ```
@@ -201,6 +207,7 @@ list$.subscribe(r=> console.log(r));
 const data = {name:'', value:0};
 
 const need_sync$ = new Subject<any>();
+
 // on time
 need_sync.subscribe(r=> console.log(r));
 need_sync.next(data);

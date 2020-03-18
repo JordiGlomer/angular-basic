@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MissionsComunicationService {
   private messages: object[] = [{ icon: '👩‍🚀', subject: 'Crew on board' }];
-  private messages$ = new BehaviorSubject<any[]>(this.messages);
+
+  private messages$ = new BehaviorSubject<object[]>([...this.messages]);
 
   constructor() {}
 
@@ -14,6 +15,6 @@ export class MissionsComunicationService {
 
   public sendMessage = (message: object) => {
     this.messages.push(message);
-    this.messages$.next(this.messages);
+    this.messages$.next([...this.messages]);
   };
 }
